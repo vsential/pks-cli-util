@@ -1,14 +1,8 @@
 language: generic
-
+dist: bionic
 services:
   - docker
-
-before_install:
-  - sudo apt-get update
-  - sudo apt-get install -y curl gnupg
-  
 install:
   - docker build -t pks-cli-util .
-
 script:
   - docker images | grep -q pks-cli-util
