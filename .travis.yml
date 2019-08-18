@@ -1,0 +1,7 @@
+language: shell
+services:
+  - docker
+install:
+  - docker build -t pks-cli-util .
+script:
+  - docker images | grep -q pks-cli-util
