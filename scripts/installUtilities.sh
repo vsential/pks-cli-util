@@ -8,7 +8,7 @@ echo "Installing VKE" \
 
 # Install Kubectl
 echo "Installing Kubectl" \
-    && apt-get install -y kubectl \
+    && apt-get -q install -y kubectl \
     && kubectl version --short --client
 
 # Install Istio
@@ -21,7 +21,7 @@ echo "Installing Istioctl" \
 
 # Install Helm
 echo "Installing Helm" \
-    && curl -o get_helm.sh https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get \
+    && curl -s -o get_helm.sh https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get \
     && chmod +x ./get_helm.sh \
     && ./get_helm.sh \
     && rm ./get_helm.sh
@@ -50,18 +50,18 @@ echo "Installing uaac" \
 
 # Install Operations Manager CLI
 echo "Installing om cli" \
-    && apt install -y om \
+    && apt-get install -q -y om \
     && which om \
     && om --version
     
 # Install Azure CLI
 echo "Installing Azure CLI" \
-    && apt-get install azure-cli \
+    && apt-get install -q -y azure-cli \
     && which az \
     && az --version
 
 # Install Google Cloud SDK
 echo "Installing Google Cloud SDK" \
-    && apt-get install -y google-cloud-sdk \
+    && apt-get install -q -y google-cloud-sdk \
     && which gcloud \
     && gcloud version

@@ -1,5 +1,5 @@
 echo "Configuring repos and updating package index" \
-    && apt-get update && apt-get install -y apt-transport-https build-essential curl dnsutils git gnupg iputils-ping lsb-release mtr net-tools openssh-server \
+    && apt-get -q update && apt-get -q install -y apt-transport-https build-essential curl dnsutils git gnupg iputils-ping lsb-release mtr net-tools openssh-server \
     openssl python3 python3-dev python3-pip python3-setuptools ruby ruby-dev traceroute vim wget \
     && echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list \
     && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key --keyring /usr/share/keyrings/cloud.google.gpg  add - \
@@ -10,4 +10,4 @@ echo "Configuring repos and updating package index" \
     && echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | tee -a /etc/apt/sources.list.d/kubernetes.list \
     && wget -q -O - https://raw.githubusercontent.com/starkandwayne/homebrew-cf/master/public.key | apt-key add - \
     && echo "deb http://apt.starkandwayne.com stable main" | tee /etc/apt/sources.list.d/starkandwayne.list \
-    && apt-get update
+    && apt-get -q update
