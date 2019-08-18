@@ -3,6 +3,10 @@ language: generic
 services:
   - docker
 
+before_install:
+  - sudo apt-get update
+  - sudo apt-get install -y curl gnupg
+  
 install:
   - docker build -t pks-cli-util .
 
