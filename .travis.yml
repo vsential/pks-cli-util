@@ -1,4 +1,7 @@
 language: minimal
+os:
+  - linux
+  - osx
 dist: bionic
 services:
   - docker
