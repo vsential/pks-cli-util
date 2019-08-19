@@ -16,11 +16,20 @@ RUN chmod +x /root/scripts/*.sh
 RUN /root/scripts/setRepos.sh
 
 # Install utilities
-RUN /root/scripts/installUtilities.sh
+RUN /root/scripts/installAzureCli.sh
+RUN /root/scripts/installBoshcli.sh
+RUN /root/scripts/installGoogleSDK.sh
+RUN /root/scripts/installHelm.sh
+RUN /root/scripts/installIstioctl.sh
+RUN /root/scripts/installKubectl.sh
+RUN /root/scripts/installOmCli.sh
+RUN /root/scripts/installPKScli.sh
+RUN /root/scripts/installUaac.sh
+RUN /root/scripts/installVKE.sh
 
 # Create Aliases
 RUN echo "alias k=kubectl" >> /root/.profile
 RUN echo "alias p=pks" >> /root/.profile
 
-# Expose ports
+# Expose ports for kube-proxy demo
 EXPOSE 8001/tcp
