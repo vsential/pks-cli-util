@@ -16,6 +16,7 @@ RUN chmod +x /root/scripts/*.sh
 RUN /root/scripts/setRepos.sh
 
 # Install utilities
+RUN /root/scripts/installAwsCli.sh
 RUN /root/scripts/installAzureCli.sh
 RUN /root/scripts/installBoshcli.sh
 RUN /root/scripts/installGoogleSDK.sh
