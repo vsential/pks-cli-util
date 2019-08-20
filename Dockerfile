@@ -29,8 +29,10 @@ RUN /root/scripts/installUaac.sh
 RUN /root/scripts/installVKE.sh
 
 # Create Aliases
-RUN echo "alias k=kubectl" >> /root/.profile
-RUN echo "alias p=pks" >> /root/.profile
+RUN source <(kubectl completion bash) \
+    && echo "source <(kubectl completion bash)" >> ~/.bashrc \
+    && echo "alias k=kubectl" >> /root/.profile \
+    && echo "alias p=pks" >> /root/.profile
 
 # Expose ports for kube-proxy demo
 EXPOSE 8001/tcp
