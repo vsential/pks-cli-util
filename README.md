@@ -17,4 +17,4 @@ Utilities installed:
 
 ### TODO
 - ~~Add Cloud Foundry Operations Manager support~~
-- Add AWS cli support
+- ~~Add AWS cli support~~
