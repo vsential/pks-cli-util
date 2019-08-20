@@ -29,8 +29,7 @@ RUN /root/scripts/installUaac.sh
 RUN /root/scripts/installVKE.sh
 
 # Create Aliases
-RUN source <(kubectl completion bash) \
-    && echo "source <(kubectl completion bash)" >> ~/.bashrc \
+RUN echo "source <(kubectl completion bash)" >> ~/.bashrc \
     && echo "alias k=kubectl" >> /root/.profile \
     && echo "alias p=pks" >> /root/.profile
 
