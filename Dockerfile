@@ -21,7 +21,7 @@ RUN /root/scripts/installAzureCli.sh
 RUN /root/scripts/installBoshcli.sh
 RUN /root/scripts/installGoogleSDK.sh
 RUN /root/scripts/installHelm.sh
-RUN /root/scripts/installIstioctl.sh
+#RUN /root/scripts/installIstioctl.sh
 RUN /root/scripts/installKubectl.sh
 RUN /root/scripts/installOmCli.sh
 RUN /root/scripts/installPKScli.sh
