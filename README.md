@@ -14,7 +14,7 @@ Utilities installed:
 - Google Cloud SDK
 - Cloud PKS (Formerly VKE)
 - Helm
-- Istioctl
+- ~~Istioctl~~
 
 ### Support
 If for any reason you find an issue or have a feature request then please open an issue here on GitHub.
