@@ -1,4 +1,4 @@
-FROM ubuntu:latest AS builder
+FROM ubuntu:bionic
 LABEL maintainer="James Bowling <jbowling@vmware.com>" \
       version="1.0" \
       description="This creates an image with all the cli binaries used in a Enterprise PKS environment."
@@ -27,9 +27,9 @@ RUN /root/scripts/installPKScli.sh
 RUN /root/scripts/installUaac.sh
 RUN /root/scripts/installVKE.sh
 
-FROM buildpack-deps:bionic
-COPY --from=builder /usr/bin/* /usr/bin/
-COPY --from=builder /usr/local/bin/* /usr/local/bin/
+#FROM buildpack-deps:bionic
+#COPY --from=builder /usr/bin/* /usr/bin/
+#COPY --from=builder /usr/local/bin/* /usr/local/bin/
 COPY bosh /root/bosh
 
 # Create Aliases
