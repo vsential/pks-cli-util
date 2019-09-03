@@ -42,7 +42,7 @@ node('docker-build') {
 					dockerImage.push("${tag}")
 					dockerImage.push("stable")
 				} else {
-					dockerImage.push("${tag}")
+					dockerImage.push("${tag}-test")
 					dockerImage.push("latest")
 				}
 			}
