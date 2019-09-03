@@ -69,9 +69,13 @@ def prepareTestStages() {
 
 	for (i=1; i<10; i++) {
 		def testStages = [:]
-		for (name in ['aws','az','bosh','gcloud','helm','kubectl','om','pks','uaac','vke']) {
+		for (name in ['aws','az','bosh','helm','om','pks','uaac','vke']) {
 			def n = "Test ${name}"
 			testStages.put(n, prepareOneTestStage(n))
+		}
+		for (name in ['gcloud','kubectl']) {
+			def n = "Test ${name}"
+			testStages.put(n, prepareOtherTestStage(n))
 		}
 		testList.add(testStages)
 	}
@@ -80,13 +84,17 @@ def prepareTestStages() {
 
 def prepareOneTestStage(String name) {
 	return {
-		stage("Build stage:${name}") {
+		stage("Test stage:${name}") {
 			println("Building ${name}")
-			if (name=aws||az||bosh||helm||om||pks||uaac||vke) {
-				sh "${name} --version"
-			} else {
-				sh "${name} version"
+			sh(script: "${name} --version", returnStatus:true)
 			}
-		}
+	}
+
+def prepareOtherTestStage(String name) {
+	return {
+		stage("Test stage:${name}") {
+			println("Building ${name}")
+			sh(script: "${name} --version", returnStatus:true)
+			}
 	}
 }
