@@ -21,6 +21,7 @@ node('docker-build') {
 					dockerImage.inside {
 						sh 'which aws && aws --version'
 					}
+				}
 				stage('azure') {
 					dockerImage.inside {
 						sh 'which az && az --version'
