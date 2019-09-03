@@ -82,7 +82,7 @@ def prepareOneTestStage(String name) {
 	return {
 		stage("Build stage:${name}") {
 			println("Building ${name}")
-			if (name='aws'||'az'||'bosh'||'helm'||'om'||'pks'||'uaac'||'vke') {
+			if (name=aws||az||bosh||helm||om||pks||uaac||vke) {
 				sh "${name} --version"
 			} else {
 				sh "${name} version"
