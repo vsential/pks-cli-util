@@ -1,3 +1,6 @@
+def runParallel = true
+def testStages
+
 node('docker-build') {
     def dockerImage
 	withEnv(['registry=dev/pks-cli-util',
@@ -15,10 +18,20 @@ node('docker-build') {
 			dockerImage = docker.build("${env.registry}:${env.tag}")
 		}
 
-		stage('Test') {
+		for (tests in testStages){
+			if (runParallel) {
+				parallel(tests)
+			} else {
+				for (test in tests.values()) {
+					test.call()
+				}
+			}
+		}
+
+//		stage('Test') {
 			/* Ideally, we would run a test framework against our image.
-			 * For this example, we're using a Volkswagen-type approach ;-) */
-			dockerImage.inside {
+			   For this example, we're using a Volkswagen-type approach ;-) */
+/*			dockerImage.inside {
 					sh 'which aws && aws --version'
 					sh 'which az && az --version'
 					sh 'which bosh && bosh --version'
@@ -30,7 +43,7 @@ node('docker-build') {
 					sh 'which uaac && uaac --version'
 					sh 'which vke && vke --version'
 			}
-		}
+		} */
 
 		stage('Push') {
 			/* Finally, we'll push the image with two tags:
@@ -45,6 +58,34 @@ node('docker-build') {
 					dockerImage.push("${tag}-test")
 					dockerImage.push("latest")
 				}
+			}
+		}
+	}
+}
+
+// Create list of test stages to suit
+def prepareTestStages() {
+	def testList = []
+
+	for (i=1; i<10; i++) {
+		def testStages = [:]
+		for (name in ['aws','az','bosh','gcloud','helm','kubectl','om','pks','uaac','vke']) {
+			def n = "Test ${name}"
+			testStages.put(n, prepareOneTestStage(n))
+		}
+		testList.add(testStages)
+	}
+	return testList
+}
+
+def prepareOneTestStage(String name) {
+	return {
+		stage("Build stage:${name}") {
+			println("Building ${name}")
+			if (name='aws'||'az'||'bosh'||'helm'||'om'||'pks'||'uaac'||'vke') {
+				sh "${name} --version"
+			} else {
+				sh "${name} version"
 			}
 		}
 	}
