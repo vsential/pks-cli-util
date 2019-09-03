@@ -41,4 +41,3 @@ WORKDIR /root
 
 # Expose ports for kube-proxy demo
 EXPOSE 8001/tcp
-ENTRYPOINT [ "bash" ]
