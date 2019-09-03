@@ -23,7 +23,7 @@ node('docker-build') {
 				/*sh 'which az && az --version'*/
 				/*sh 'which bosh && bosh --version'*/
 				sh 'which gcloud && gcloud version'
-				sh 'which helm && helm version'
+				sh 'which helm && helm version --client'
 				sh 'which kubectl && kubectl version --short --client'
 				sh 'which om && om --version'
 				sh 'which pks && pks --version'
