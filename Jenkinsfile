@@ -24,7 +24,7 @@ node('docker-build') {
 				}
 				stage('azure') {
 					dockerImage.inside {
-						sh 'which az && az --version'
+						sh 'cd /root && which az && az --version'
 					}
 				}
 				stage('bosh') {
