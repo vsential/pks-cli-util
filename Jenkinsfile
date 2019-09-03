@@ -43,7 +43,7 @@ node('docker-build') {
 			}, 'helm': {
 				stage('helm') {
 					dockerImage.inside {
-						sh 'which helm && helm version'
+						sh 'which helm && helm version --client'
 					}
 				}
 			}, 'kubectl': {
