@@ -17,17 +17,54 @@ node('docker-build') {
 
 		stage('Test') {
 			parallel 'cliTests': {
-				dockerImage.inside {
-					sh 'which aws && aws --version'
-					sh 'which az && az --version'
-					sh 'which bosh && bosh --version'
-					sh 'which gcloud && gcloud version'
-					sh 'which helm && helm --version'
-					sh 'which kubectl && kubectl version --short --client'
-					sh 'which om && om --version'
-					sh 'which pks && pks --version'
-					sh 'which uaac && uaac --version'
-					sh 'which vke && vke --version'
+				stage('aws') {
+					dockerImage.inside {
+						sh 'which aws && aws --version'
+					}
+				stage('azure') {
+					dockerImage.inside {
+						sh 'which az && az --version'
+					}
+				}
+				stage('bosh') {
+					dockerImage.inside {
+						sh 'which bosh && bosh --version'
+					}
+				}
+				stage('gcloud') {
+					dockerImage.inside {
+						sh 'which gcloud && gcloud version'
+					}
+				}
+				stage('helm') {
+					dockerImage.inside {
+						sh 'which helm && helm --version'
+					}
+				}
+				stage('kubectl') {
+					dockerImage.inside {
+						sh 'which kubectl && kubectl version --short --client'
+					}
+				}
+				stage('om') {
+					dockerImage.inside {
+						sh 'which om && om --version'
+					}
+				}
+				stage('pks') {
+					dockerImage.inside {
+						sh 'which pks && pks --version'
+					}
+				}
+				stage('uaac') {
+					dockerImage.inside {
+						sh 'which uaac && uaac --version'
+					}
+				}
+				stage('vke') {
+					dockerImage.inside {
+						sh 'which vke && vke --version'
+					}
 				}
 			}
 		}
