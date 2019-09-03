@@ -1,4 +1,4 @@
-FROM ubuntu:latest AS builder
+FROM ubuntu:latest
 LABEL maintainer="James Bowling <jbowling@vmware.com>" \
       version="1.0" \
       description="This creates an image with all the cli binaries used in a Enterprise PKS environment."
@@ -8,6 +8,7 @@ ENV BOSH_VERSION=6.0.0
 WORKDIR /
 
 # Copy support files
+COPY bosh /root/bosh
 COPY scripts /root/scripts
 RUN chmod +x /root/scripts/*.sh
 
@@ -26,11 +27,6 @@ RUN /root/scripts/installOmCli.sh
 RUN /root/scripts/installPKScli.sh
 RUN /root/scripts/installUaac.sh
 RUN /root/scripts/installVKE.sh
-
-FROM ubuntu:latest
-COPY --from=builder /usr/bin/* /usr/bin/
-COPY --from=builder /usr/local/bin/* /usr/local/bin/
-COPY bosh /root/bosh
 
 # Create Aliases
 RUN echo "source <(kubectl completion bash)" >> ~/.bashrc \

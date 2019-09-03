@@ -1,4 +1,4 @@
 # Install Kubectl
 echo "Installing Kubectl" \
-    && apt-get -q install -y --no-install-recommends kubectl \
+    && apt-get -q install -y kubectl \
     && kubectl version --short --client

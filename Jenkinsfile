@@ -6,7 +6,7 @@ node('docker-build') {
 			 'tag=1.0.${BUILD_NUMBER}']) {
 		stage('Preparation') {
 			/* Let's make sure we have the repository cloned to our workspace */
-			git branch: "${env.BRANCH_NAME}", url: 'https://github.com/vsential/pks-cli-util.git'
+			git 'https://github.com/vsential/pks-cli-util.git'
 		}
 
 		stage('Build') {
