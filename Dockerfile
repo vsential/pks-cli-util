@@ -28,8 +28,8 @@ RUN /root/scripts/installUaac.sh
 RUN /root/scripts/installVKE.sh
 
 FROM ubuntu:latest
-COPY --from=builder /usr/bin/* /usr/bin
-COPY --from=builder /usr/local/bin/* /usr/local/bin/*
+COPY --from=builder /usr/bin/* /usr/bin/
+COPY --from=builder /usr/local/bin/* /usr/local/bin/
 COPY bosh /root/bosh
 
 # Create Aliases
