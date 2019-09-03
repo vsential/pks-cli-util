@@ -37,5 +37,8 @@ RUN echo "source <(kubectl completion bash)" >> ~/.bashrc \
     && echo "alias k=kubectl" >> /root/.profile \
     && echo "alias p=pks" >> /root/.profile
 
+WORKDIR /root
+
 # Expose ports for kube-proxy demo
 EXPOSE 8001/tcp
+ENTRYPOINT [ "bash" ]

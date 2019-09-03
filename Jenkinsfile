@@ -25,7 +25,7 @@ node('docker-build') {
 			}, 'azure': {
 				stage('azure') {
 					dockerImage.inside {
-						sh 'cd /root && which az && az --version'
+						sh 'which az && az --version'
 					}
 				}
 			}, 'bosh': {
@@ -43,7 +43,7 @@ node('docker-build') {
 			}, 'helm': {
 				stage('helm') {
 					dockerImage.inside {
-						sh 'which helm && helm --version'
+						sh 'which helm && helm version'
 					}
 				}
 			}, 'kubectl': {
