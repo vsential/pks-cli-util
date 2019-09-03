@@ -6,7 +6,7 @@ LABEL maintainer="James Bowling <jbowling@vmware.com>" \
 ENV BOSH_VERSION=6.0.0
 ENV NOTARY_VERSION=0.6.1
 
-WORKDIR 
+WORKDIR /root
 
 # Copy support files
 COPY bosh ./bosh
