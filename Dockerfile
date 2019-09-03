@@ -4,32 +4,34 @@ LABEL maintainer="James Bowling <jbowling@vmware.com>" \
       description="This creates an image with all the cli binaries used in a Enterprise PKS environment."
 
 ENV BOSH_VERSION=6.0.0
+ENV NOTARY_VERSION=0.6.1
 
-WORKDIR /
+WORKDIR 
 
 # Copy support files
-COPY bosh /root/bosh
-COPY scripts /root/scripts
+COPY bosh ./bosh
+COPY scripts ./scripts
 
 # Setup needed repositories and install base dependencies
-RUN chmod +x /root/scripts/*.sh && /root/scripts/setRepos.sh
+RUN chmod +x ./scripts/*.sh && ./scripts/setRepos.sh
 
 # Install utilities
-RUN /root/scripts/installAwsCli.sh
-RUN /root/scripts/installAzureCli.sh
-RUN /root/scripts/installBoshcli.sh && \
-    /root/scripts/installOmCli.sh && \
-    /root/scripts/installPKScli.sh && \
-    /root/scripts/installUaac.sh
-RUN /root/scripts/installGoogleSDK.sh
-RUN /root/scripts/installHelm.sh
-RUN /root/scripts/installKubectl.sh
-RUN /root/scripts/installVKE.sh
+RUN ./scripts/installAwsCli.sh
+RUN ./scripts/installAzureCli.sh
+RUN ./scripts/installBoshcli.sh && \
+    ./scripts/installOmCli.sh && \
+    ./scripts/installNotary.sh && \
+    ./scripts/installPKScli.sh && \
+    ./scripts/installUaac.sh
+RUN ./scripts/installGoogleSDK.sh
+RUN ./scripts/installHelm.sh
+RUN ./scripts/installKubectl.sh
+RUN ./scripts/installVKE.sh
 
 # Create Aliases
 RUN echo "source <(kubectl completion bash)" >> ~/.bashrc \
-    && echo "alias k=kubectl" >> /root/.profile \
-    && echo "alias p=pks" >> /root/.profile
+    && echo "alias k=kubectl" >> /.profile \
+    && echo "alias p=pks" >> /.profile
 
 # Expose ports for kube-proxy demo
 EXPOSE 8001/tcp
