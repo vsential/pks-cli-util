@@ -21,8 +21,8 @@ node('docker-build') {
 			dockerImage.inside {
 				sh 'cd /root'
 				sh 'which aws && aws --version'
-				sh 'which az && az --version'
-				sh 'which bosh && bosh --version'
+				/*sh 'which az && az --version'*/
+				/*sh 'which bosh && bosh --version'*/
 				sh 'which gcloud && gcloud version'
 				sh 'which helm && helm --version'
 				sh 'which kubectl && kubectl version --short --client'
