@@ -67,14 +67,14 @@ node('docker-build') {
 def prepareTestStages() {
 	def testList = []
 
-	for (i=1; i<10; i++) {
+	for (i=1; i<11; i++) {
 		def testStages = [:]
 		for (name in ['aws','az','bosh','helm','om','pks','uaac','vke']) {
-			def n = "Test ${name}"
+			def n = "${name}"
 			testStages.put(n, prepareOneTestStage(n))
 		}
 		for (name in ['gcloud','kubectl']) {
-			def n = "Test ${name}"
+			def n = "${name}"
 			testStages.put(n, prepareOtherTestStage(n))
 		}
 		testList.add(testStages)
