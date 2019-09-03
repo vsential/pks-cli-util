@@ -18,63 +18,63 @@ node('docker-build') {
 		stage('Test') {
 			parallel 'aws': {
 				stage('aws') {
-//					dockerImage.inside {
+				dockerImage.run {
 						sh 'which aws && aws --version'
-//					}
+					}
 				}
 			}, 'azure': {
 				stage('azure') {
-//					dockerImage.inside {
+					dockerImage.run {
 						sh 'which az && az --version'
-//					}
+					}
 				}
 			}, 'bosh': {
 				stage('bosh') {
-//					dockerImage.inside {
+					dockerImage.run {
 						sh 'which bosh && bosh --version'
-//					}
+					}
 				}
 			}, 'gcloud': {
 				stage('gcloud') {
-//					dockerImage.inside {
+					dockerImage.run {
 						sh 'which gcloud && gcloud version'
-//					}
+					}
 				}
 			}, 'helm': {
 				stage('helm') {
-//					dockerImage.inside {
+					dockerImage.run {
 						sh 'which helm && helm version --client'
-//					}
+					}
 				}
 			}, 'kubectl': {
 				stage('kubectl') {
-//					dockerImage.inside {
+					dockerImage.run {
 						sh 'which kubectl && kubectl version --short --client'
-//					}
+					}
 				}
 			}, 'om': {
 				stage('om') {
-//					dockerImage.inside {
+					dockerImage.run {
 						sh 'which om && om --version'
-//					}
+					}
 				}
 			}, 'pks': {
 				stage('pks') {
-//					dockerImage.inside {
+					dockerImage.run {
 						sh 'which pks && pks --version'
-//					}
+					}
 				}
 			}, 'uaac': {
 				stage('uaac') {
-//					dockerImage.inside {
+					dockerImage.run {
 						sh 'which uaac && uaac --version'
-//					}
+					}
 				}
 			}, 'vke': {
 				stage('vke') {
-//					dockerImage.inside {
+					dockerImage.run {
 						sh 'which vke && vke --version'
-//					}
+					}
 				}
 			}
 		}
@@ -82,7 +82,7 @@ node('docker-build') {
 //		stage('Test') {
 			/* Ideally, we would run a test framework against our image.
 			   For this example, we're using a Volkswagen-type approach ;-) */
-/*			dockerImage.inside {
+/*			dockerImage.run {
 					sh 'which aws && aws --version'
 					sh 'which az && az --version'
 					sh 'which bosh && bosh --version'
