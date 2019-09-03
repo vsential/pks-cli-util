@@ -79,23 +79,6 @@ node('docker-build') {
 			}
 		}
 
-//		stage('Test') {
-			/* Ideally, we would inside() a test framework against our image.
-			   For this example, we're using a Volkswagen-type approach ;-) */
-/*			dockerImage.inside() {
-					sh 'which aws && aws --version'
-					sh 'which az && az --version'
-					sh 'which bosh && bosh --version'
-					sh 'which gcloud && gcloud version'
-					sh 'which helm && helm --version'
-					sh 'which kubectl && kubectl version --short --client'
-					sh 'which om && om --version'
-					sh 'which pks && pks --version'
-					sh 'which uaac && uaac --version'
-					sh 'which vke && vke --version'
-			}
-		} */
-
 		stage('Push') {
 			/* Finally, we'll push the image with two tags:
 			 * First, the incremental build number from Jenkins
@@ -105,9 +88,11 @@ node('docker-build') {
 				if (env.BRANCH_NAME == 'master') {
 					dockerImage.push("${tag}")
 					dockerImage.push("stable")
-				} else {
-					dockerImage.push("${tag}-test")
+				} else if (env.BRANCH_NAME == 'dev') {
+					dockerImage.push("${tag}-dev")
 					dockerImage.push("latest")
+				} else {
+					println("*****Successful test build!*****")
 				}
 			}
 		}
