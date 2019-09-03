@@ -89,6 +89,7 @@ def prepareOneTestStage(String name) {
 			sh(script: "${name} --version", returnStatus:true)
 			}
 	}
+}
 
 def prepareOtherTestStage(String name) {
 	return {
