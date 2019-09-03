@@ -18,16 +18,18 @@ node('docker-build') {
 			dockerImage = docker.build("${env.registry}:${env.tag}")
 		}
 
-		for (tests in testStages){
-			if (runParallel) {
-				parallel(tests)
-			} else {
-				for (test in tests.values()) {
-					test.call()
+		stage('Test') {
+			for (tests in testStages){
+				if (runParallel) {
+					parallel(tests)
+				} else {
+					for (test in tests.values()) {
+						test.call()
+					}
 				}
 			}
 		}
-
+		
 //		stage('Test') {
 			/* Ideally, we would run a test framework against our image.
 			   For this example, we're using a Volkswagen-type approach ;-) */
