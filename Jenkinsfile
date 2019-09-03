@@ -19,7 +19,6 @@ node('docker-build') {
 			/* Ideally, we would run a test framework against our image.
 			 * For this example, we're using a Volkswagen-type approach ;-) */
 			dockerImage.inside {
-				sh 'cd /root'
 				sh 'which aws && aws --version'
 				/*sh 'which az && az --version'*/
 				/*sh 'which bosh && bosh --version'*/
