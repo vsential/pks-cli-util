@@ -1,6 +1,6 @@
 FROM ubuntu:bionic
 LABEL maintainer="James Bowling <jbowling@vmware.com>" \
-      version="1.0" \
+      version="1.1" \
       description="This creates an image with all the cli binaries used in a Enterprise PKS environment."
 
 ENV BOSH_VERSION=6.0.0
