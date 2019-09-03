@@ -30,6 +30,7 @@ node('docker-build') {
 					sh 'which vke && vke --version'
 				}
 			}
+		}
 
 //		stage('Test') {
 			/* Ideally, we would run a test framework against our image.
