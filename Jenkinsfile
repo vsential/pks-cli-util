@@ -6,7 +6,7 @@ node('docker-build') {
 			 'tag=1.0.${BUILD_NUMBER}']) {
 		stage('Preparation') {
 			/* Let's make sure we have the repository cloned to our workspace */
-			git 'https://github.com/vsential/pks-cli-util.git'
+			git branch: "${env.BRANCH_NAME}", url: 'https://github.com/vsential/pks-cli-util.git'
 		}
 
 		stage('Build') {
@@ -16,6 +16,7 @@ node('docker-build') {
 		}
 
 		stage('Test') {
+<<<<<<< HEAD
 			/* Ideally, we would run a test framework against our image.
 			 * For this example, we're using a Volkswagen-type approach ;-) */
 			dockerImage.inside {
@@ -29,6 +30,55 @@ node('docker-build') {
 				sh 'which pks && pks --version'
 				sh 'which uaac && uaac --version'
 				sh 'which vke && vke --version'
+=======
+			parallel 'aws': {
+				stage('aws') {
+				dockerImage.inside() {
+						sh 'which aws && aws --version'
+					}
+				}
+			}, 'azure': {
+				stage('azure') {
+					dockerImage.inside('-u root') {
+						sh 'cd /root'
+						sh 'which az && az --version'
+					}
+				}
+			}, 'gcloud': {
+				stage('gcloud') {
+					dockerImage.inside() {
+						sh 'which gcloud && gcloud version'
+					}
+				}
+			}, 'helm': {
+				stage('helm') {
+					dockerImage.inside() {
+						sh 'which helm && helm version --client'
+					}
+				}
+			}, 'kubectl': {
+				stage('kubectl') {
+					dockerImage.inside() {
+						sh 'which kubectl && kubectl version --short --client'
+					}
+				}
+			}, 'pks': {
+				stage('pks') {
+					dockerImage.inside('-u root') {
+						sh 'cd /root'
+						sh 'which bosh && bosh --version'
+						sh 'which om && om --version'
+						sh 'which pks && pks --version'
+						sh 'which uaac && uaac --version'
+					}
+				}
+			}, 'vke': {
+				stage('vke') {
+					dockerImage.inside() {
+						sh 'which vke && vke --version'
+					}
+				}
+>>>>>>> test-automation
 			}
 		}
 
@@ -41,9 +91,17 @@ node('docker-build') {
 				if (env.BRANCH_NAME == 'master') {
 					dockerImage.push("${tag}")
 					dockerImage.push("stable")
+<<<<<<< HEAD
 				} else {
 					dockerImage.push("${tag}")
 					dockerImage.push("latest")
+=======
+				} else if (env.BRANCH_NAME == 'dev') {
+					dockerImage.push("${tag}-dev")
+					dockerImage.push("latest")
+				} else {
+					println("*****Successful test build!*****")
+>>>>>>> test-automation
 				}
 			}
 		}

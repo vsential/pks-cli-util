@@ -1,5 +1,5 @@
 # Install Google Cloud SDK
 echo "Installing Google Cloud SDK" \
-    && apt-get install -q -y google-cloud-sdk \
+    && apt-get install -q -y --no-install-recommends google-cloud-sdk \
     && which gcloud \
     && gcloud version
