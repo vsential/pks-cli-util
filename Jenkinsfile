@@ -29,8 +29,13 @@ node('docker-build') {
 			 * Second, the 'latest' tag.
 			 * Pushing multiple tags is cheap, as all the layers are reused. */
 			docker.withRegistry("${env.registryUrl}", "${env.harborCredentials}") {
-				dockerImage.push("${tag}")
-				dockerImage.push("latest")
+				if (env.BRANCH_NAME == 'master') {
+					dockerImage.push("${tag}")
+					dockerImage.push("stable")
+				} else {
+					dockerImage.push("${tag}")
+					dockerImage.push("latest")
+				}
 			}
 		}
 	}
