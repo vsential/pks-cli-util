@@ -1,6 +1,3 @@
-def runParallel = true
-def testStages
-
 node('docker-build') {
     def dockerImage
 	withEnv(['registry=dev/pks-cli-util',
@@ -19,17 +16,21 @@ node('docker-build') {
 		}
 
 		stage('Test') {
-			for (tests in testStages){
-				if (runParallel) {
-					parallel(tests)
-				} else {
-					for (test in tests.values()) {
-						test.call()
-					}
+			parallel 'cliTests': {
+				dockerImage.inside {
+					sh 'which aws && aws --version'
+					sh 'which az && az --version'
+					sh 'which bosh && bosh --version'
+					sh 'which gcloud && gcloud version'
+					sh 'which helm && helm --version'
+					sh 'which kubectl && kubectl version --short --client'
+					sh 'which om && om --version'
+					sh 'which pks && pks --version'
+					sh 'which uaac && uaac --version'
+					sh 'which vke && vke --version'
 				}
 			}
-		}
-		
+
 //		stage('Test') {
 			/* Ideally, we would run a test framework against our image.
 			   For this example, we're using a Volkswagen-type approach ;-) */
@@ -62,42 +63,5 @@ node('docker-build') {
 				}
 			}
 		}
-	}
-}
-
-// Create list of test stages to suit
-def prepareTestStages() {
-	def testList = []
-
-	for (i=1; i<11; i++) {
-		def testStages = [:]
-		for (name in ['aws','az','bosh','helm','om','pks','uaac','vke']) {
-			def n = "${name}"
-			testStages.put(n, prepareOneTestStage(n))
-		}
-		for (name in ['gcloud','kubectl']) {
-			def n = "${name}"
-			testStages.put(n, prepareOtherTestStage(n))
-		}
-		testList.add(testStages)
-	}
-	return testList
-}
-
-def prepareOneTestStage(String name) {
-	return {
-		stage("Test stage:${name}") {
-			println("Building ${name}")
-			sh(script: "${name} --version", returnStatus:true)
-			}
-	}
-}
-
-def prepareOtherTestStage(String name) {
-	return {
-		stage("Test stage:${name}") {
-			println("Building ${name}")
-			sh(script: "${name} --version", returnStatus:true)
-			}
 	}
 }
