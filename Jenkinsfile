@@ -3,7 +3,7 @@ node('docker-build') {
 	withEnv(['registry=dev/pks-cli-util',
 			 'registryUrl=https://harbor.jb.cloud.lab',
 			 'harborCredentials=2a0345af-3cba-4af6-90b2-017019f2ffe9',
-			 'tag=1.0.${BUILD_NUMBER}']) {
+			 'tag=1.1.${BUILD_NUMBER}']) {
 		stage('Preparation') {
 			/* Let's make sure we have the repository cloned to our workspace */
 			git branch: "${env.BRANCH_NAME}", url: 'https://github.com/vsential/pks-cli-util.git'
