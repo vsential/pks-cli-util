@@ -19,7 +19,16 @@ node('docker-build') {
 			/* Ideally, we would run a test framework against our image.
 			 * For this example, we're using a Volkswagen-type approach ;-) */
 			dockerImage.inside {
-				sh 'pks --version && which pks'
+				sh 'which aws && aws --version'
+				sh 'which az && az --version'
+				sh 'which bosh && bosh --version'
+				sh 'which gcloud && gcloud version'
+				sh 'which helm && helm --version'
+				sh 'which kubectl && kubectl version --short --client'
+				sh 'which om && om --version'
+				sh 'which pks && pks --version'
+				sh 'which uaac && uaac --version'
+				sh 'which vke && vke --version'
 			}
 		}
 
