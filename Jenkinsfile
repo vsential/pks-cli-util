@@ -16,21 +16,6 @@ node('docker-build') {
 		}
 
 		stage('Test') {
-<<<<<<< HEAD
-			/* Ideally, we would run a test framework against our image.
-			 * For this example, we're using a Volkswagen-type approach ;-) */
-			dockerImage.inside {
-				sh 'which aws && aws --version'
-				/*sh 'which az && az --version'*/
-				/*sh 'which bosh && bosh --version'*/
-				sh 'which gcloud && gcloud version'
-				sh 'which helm && helm version --client'
-				sh 'which kubectl && kubectl version --short --client'
-				sh 'which om && om --version'
-				sh 'which pks && pks --version'
-				sh 'which uaac && uaac --version'
-				sh 'which vke && vke --version'
-=======
 			parallel 'aws': {
 				stage('aws') {
 				dockerImage.inside() {
@@ -78,7 +63,6 @@ node('docker-build') {
 						sh 'which vke && vke --version'
 					}
 				}
->>>>>>> test-automation
 			}
 		}
 
@@ -91,17 +75,11 @@ node('docker-build') {
 				if (env.BRANCH_NAME == 'master') {
 					dockerImage.push("${tag}")
 					dockerImage.push("stable")
-<<<<<<< HEAD
-				} else {
-					dockerImage.push("${tag}")
-					dockerImage.push("latest")
-=======
 				} else if (env.BRANCH_NAME == 'dev') {
 					dockerImage.push("${tag}-dev")
 					dockerImage.push("latest")
 				} else {
 					println("*****Successful test build!*****")
->>>>>>> test-automation
 				}
 			}
 		}
