@@ -18,63 +18,63 @@ node('docker-build') {
 		stage('Test') {
 			parallel 'aws': {
 				stage('aws') {
-					dockerImage.inside {
+//					dockerImage.inside {
 						sh 'which aws && aws --version'
-					}
+//					}
 				}
 			}, 'azure': {
 				stage('azure') {
-					dockerImage.inside {
+//					dockerImage.inside {
 						sh 'which az && az --version'
-					}
+//					}
 				}
 			}, 'bosh': {
 				stage('bosh') {
-					dockerImage.inside {
+//					dockerImage.inside {
 						sh 'which bosh && bosh --version'
-					}
+//					}
 				}
 			}, 'gcloud': {
 				stage('gcloud') {
-					dockerImage.inside {
+//					dockerImage.inside {
 						sh 'which gcloud && gcloud version'
-					}
+//					}
 				}
 			}, 'helm': {
 				stage('helm') {
-					dockerImage.inside {
+//					dockerImage.inside {
 						sh 'which helm && helm version --client'
-					}
+//					}
 				}
 			}, 'kubectl': {
 				stage('kubectl') {
-					dockerImage.inside {
+//					dockerImage.inside {
 						sh 'which kubectl && kubectl version --short --client'
-					}
+//					}
 				}
 			}, 'om': {
 				stage('om') {
-					dockerImage.inside {
+//					dockerImage.inside {
 						sh 'which om && om --version'
-					}
+//					}
 				}
 			}, 'pks': {
 				stage('pks') {
-					dockerImage.inside {
+//					dockerImage.inside {
 						sh 'which pks && pks --version'
-					}
+//					}
 				}
 			}, 'uaac': {
 				stage('uaac') {
-					dockerImage.inside {
+//					dockerImage.inside {
 						sh 'which uaac && uaac --version'
-					}
+//					}
 				}
 			}, 'vke': {
 				stage('vke') {
-					dockerImage.inside {
+//					dockerImage.inside {
 						sh 'which vke && vke --version'
-					}
+//					}
 				}
 			}
 		}
