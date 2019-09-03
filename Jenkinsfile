@@ -19,38 +19,16 @@ node('docker-build') {
 			/* Ideally, we would run a test framework against our image.
 			 * For this example, we're using a Volkswagen-type approach ;-) */
 			dockerImage.inside {
-				stages {
-					stage('AWS') {
-						sh 'which aws && aws --version'
-					}
-					stage('Azure') {
-						sh 'which az && az --version'
-					}
-					stage('Bosh') {
-						sh 'which bosh && bosh --version'
-					}
-					stage('Google Cloud SDK') {
-						sh 'which gcloud && gcloud version'
-					}
-					stage('Helm') {
-						sh 'which helm && helm --version'
-					}
-					stage('kubectl') {
-						sh 'which kubectl && kubectl version --short --client'
-					}
-					stage('Ops Manager') {
-						sh 'which om && om --version'
-					}
-					stage('PKS') {
-						sh 'which pks && pks --version'
-					}
-					stage('UAAC') {
-						sh 'which uaac && uaac --version'
-					}
-					stage('VKE') {
-						sh 'which vke && vke --version'
-					}
-				}
+					sh 'which aws && aws --version'
+					sh 'which az && az --version'
+					sh 'which bosh && bosh --version'
+					sh 'which gcloud && gcloud version'
+					sh 'which helm && helm --version'
+					sh 'which kubectl && kubectl version --short --client'
+					sh 'which om && om --version'
+					sh 'which pks && pks --version'
+					sh 'which uaac && uaac --version'
+					sh 'which vke && vke --version'
 			}
 		}
 
