@@ -18,61 +18,61 @@ node('docker-build') {
 		stage('Test') {
 			parallel 'aws': {
 				stage('aws') {
-				dockerImage.run {
+				dockerImage.withRun('-u root') {
 						sh 'which aws && aws --version'
 					}
 				}
 			}, 'azure': {
 				stage('azure') {
-					dockerImage.run {
+					dockerImage.withRun('-u root') {
 						sh 'which az && az --version'
 					}
 				}
 			}, 'bosh': {
 				stage('bosh') {
-					dockerImage.run {
+					dockerImage.withRun('-u root') {
 						sh 'which bosh && bosh --version'
 					}
 				}
 			}, 'gcloud': {
 				stage('gcloud') {
-					dockerImage.run {
+					dockerImage.withRun('-u root') {
 						sh 'which gcloud && gcloud version'
 					}
 				}
 			}, 'helm': {
 				stage('helm') {
-					dockerImage.run {
+					dockerImage.withRun('-u root') {
 						sh 'which helm && helm version --client'
 					}
 				}
 			}, 'kubectl': {
 				stage('kubectl') {
-					dockerImage.run {
+					dockerImage.withRun('-u root') {
 						sh 'which kubectl && kubectl version --short --client'
 					}
 				}
 			}, 'om': {
 				stage('om') {
-					dockerImage.run {
+					dockerImage.withRun('-u root') {
 						sh 'which om && om --version'
 					}
 				}
 			}, 'pks': {
 				stage('pks') {
-					dockerImage.run {
+					dockerImage.withRun('-u root') {
 						sh 'which pks && pks --version'
 					}
 				}
 			}, 'uaac': {
 				stage('uaac') {
-					dockerImage.run {
+					dockerImage.withRun('-u root') {
 						sh 'which uaac && uaac --version'
 					}
 				}
 			}, 'vke': {
 				stage('vke') {
-					dockerImage.run {
+					dockerImage.withRun('-u root') {
 						sh 'which vke && vke --version'
 					}
 				}
@@ -80,9 +80,9 @@ node('docker-build') {
 		}
 
 //		stage('Test') {
-			/* Ideally, we would run a test framework against our image.
+			/* Ideally, we would withRun('-u root') a test framework against our image.
 			   For this example, we're using a Volkswagen-type approach ;-) */
-/*			dockerImage.run {
+/*			dockerImage.withRun('-u root') {
 					sh 'which aws && aws --version'
 					sh 'which az && az --version'
 					sh 'which bosh && bosh --version'
