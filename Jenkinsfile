@@ -24,14 +24,9 @@ node('docker-build') {
 				}
 			}, 'azure': {
 				stage('azure') {
-					dockerImage.inside() {
-						sh 'which az'
-					}
-				}
-			}, 'bosh': {
-				stage('bosh') {
-					dockerImage.inside() {
-						sh 'which bosh'
+					dockerImage.inside(-u root) {
+						sh 'cd /root'
+						sh 'which az && az --version'
 					}
 				}
 			}, 'gcloud': {
@@ -52,21 +47,13 @@ node('docker-build') {
 						sh 'which kubectl && kubectl version --short --client'
 					}
 				}
-			}, 'om': {
-				stage('om') {
-					dockerImage.inside() {
-						sh 'which om && om --version'
-					}
-				}
 			}, 'pks': {
 				stage('pks') {
-					dockerImage.inside() {
+					dockerImage.inside('-u root') {
+						sh 'cd /root'
+						sh 'which bosh && bosh --version'
+						sh 'which om && om --version'
 						sh 'which pks && pks --version'
-					}
-				}
-			}, 'uaac': {
-				stage('uaac') {
-					dockerImage.inside() {
 						sh 'which uaac && uaac --version'
 					}
 				}
