@@ -38,8 +38,7 @@ RUN echo "source <(kubectl completion bash)" >> ~/.bashrc \
     && echo "alias p=pks" >> /root/.profile
 
 WORKDIR /root
+USER root
 
 # Expose ports for kube-proxy demo
 EXPOSE 8001/tcp
-
-ENTRYPOINT [ "bash", "-c cd /root" ]

@@ -18,61 +18,61 @@ node('docker-build') {
 		stage('Test') {
 			parallel 'aws': {
 				stage('aws') {
-				dockerImage.withRun('-u root') {
+				dockerImage.inside() {
 						sh 'which aws && aws --version'
 					}
 				}
 			}, 'azure': {
 				stage('azure') {
-					dockerImage.withRun('-u root') {
+					dockerImage.inside() {
 						sh 'which az && az --version'
 					}
 				}
 			}, 'bosh': {
 				stage('bosh') {
-					dockerImage.withRun('-u root') {
+					dockerImage.inside() {
 						sh 'which bosh && bosh --version'
 					}
 				}
 			}, 'gcloud': {
 				stage('gcloud') {
-					dockerImage.withRun('-u root') {
+					dockerImage.inside() {
 						sh 'which gcloud && gcloud version'
 					}
 				}
 			}, 'helm': {
 				stage('helm') {
-					dockerImage.withRun('-u root') {
+					dockerImage.inside() {
 						sh 'which helm && helm version --client'
 					}
 				}
 			}, 'kubectl': {
 				stage('kubectl') {
-					dockerImage.withRun('-u root') {
+					dockerImage.inside() {
 						sh 'which kubectl && kubectl version --short --client'
 					}
 				}
 			}, 'om': {
 				stage('om') {
-					dockerImage.withRun('-u root') {
+					dockerImage.inside() {
 						sh 'which om && om --version'
 					}
 				}
 			}, 'pks': {
 				stage('pks') {
-					dockerImage.withRun('-u root') {
+					dockerImage.inside() {
 						sh 'which pks && pks --version'
 					}
 				}
 			}, 'uaac': {
 				stage('uaac') {
-					dockerImage.withRun('-u root') {
+					dockerImage.inside() {
 						sh 'which uaac && uaac --version'
 					}
 				}
 			}, 'vke': {
 				stage('vke') {
-					dockerImage.withRun('-u root') {
+					dockerImage.inside() {
 						sh 'which vke && vke --version'
 					}
 				}
@@ -80,9 +80,9 @@ node('docker-build') {
 		}
 
 //		stage('Test') {
-			/* Ideally, we would withRun('-u root') a test framework against our image.
+			/* Ideally, we would inside() a test framework against our image.
 			   For this example, we're using a Volkswagen-type approach ;-) */
-/*			dockerImage.withRun('-u root') {
+/*			dockerImage.inside() {
 					sh 'which aws && aws --version'
 					sh 'which az && az --version'
 					sh 'which bosh && bosh --version'
