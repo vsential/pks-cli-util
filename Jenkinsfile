@@ -25,13 +25,13 @@ node('docker-build') {
 			}, 'azure': {
 				stage('azure') {
 					dockerImage.inside() {
-						sh 'which az && az --version'
+						sh 'which az'
 					}
 				}
 			}, 'bosh': {
 				stage('bosh') {
 					dockerImage.inside() {
-						sh 'which bosh && bosh --version'
+						sh 'which bosh'
 					}
 				}
 			}, 'gcloud': {
