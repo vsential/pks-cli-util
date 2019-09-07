@@ -1,6 +1,7 @@
 # pks-cli-util
 [![Build Status](https://travis-ci.org/vsential/pks-cli-util.svg?branch=master)](https://travis-ci.org/vsential/pks-cli-util)
-[![Release](https://img.shields.io/github/v/release/vsential/pks-cli-util?style=plastic)](https://github.com/vsential/pks-cli-util/releases)
+[![Release](https://img.shields.io/github/v/release/vsential/pks-cli-util?sort=semver)](https://github.com/vsential/pks-cli-util/releases)
+
 
 This creates an image with all the cli binaries used in a Enterprise PKS environment.
 
